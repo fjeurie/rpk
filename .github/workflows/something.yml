@@ -2,7 +2,7 @@ name: Something auto
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   generate-key:
