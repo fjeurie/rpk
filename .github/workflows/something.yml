@@ -1,0 +1,26 @@
+name: Something auto
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  generate-key:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Generate random PK
+        run: |
+          openssl rand -hex 32 > pk
+
+      - name: Commit & push
+        run: |
+          git config user.email "werkn@duck.com"
+          git config user.name "fjeurie"
+          git add pk
+          git commit -m "New PK" || echo "No changes"
+          git push || true
